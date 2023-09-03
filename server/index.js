@@ -9,6 +9,7 @@ import morgan from "morgan"
 import path from "path"
 import { fileURLToPath } from "url"
 import { register } from "./controllers/auth.js"
+import router from "./routes/auth.js"
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url)
@@ -40,6 +41,9 @@ const upload = multer({storage})
 
 /** routes with files */
 app.post("/auth/register", upload.single("picture"), register)
+
+/** ROUTES */
+app.use("/auth", router)
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 6001
